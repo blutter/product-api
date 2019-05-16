@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace RestExampleApi.Models
 {
-    public class ProductRequest
+    public class ProductPostRequest
     {
-        public string Id { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string Model { get; set; }
+        [Required]
         public string Brand { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace RestExample.Config
     {
         public RestExampleApiMapper()
         {
-            CreateMap<ProductRequest, Product>();
+            CreateMap<ProductPostRequest, Product>();
             CreateMap<Product, ProductResponse>();
         }
     }

@@ -150,8 +150,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductPostResponse.cs" />
     <Compile Include="Models\ProductResponse.cs" />
-    <Compile Include="Models\ProductRequest.cs" />
+    <Compile Include="Models\ProductPostRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

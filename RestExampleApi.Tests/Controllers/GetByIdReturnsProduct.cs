@@ -38,7 +38,7 @@ namespace RestExampleApi.Tests.Controllers
         }
 
         [Test]
-        public void ThenTheProductIsReadFromTheRepository()
+        public void ThenTheProductIsReadFromTheService()
         {
             SUT.ProductService.Verify(repo => repo.GetProduct("id"), Times.Once);
         }

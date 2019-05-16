@@ -34,13 +34,17 @@ namespace RestExampleApi.Controllers
         }
 
         // POST products
-        public void Post([FromBody]ProductRequest product)
+        public async Task<ProductPostResponse> Post([FromBody]ProductPostRequest productPostRequest)
         {
-            throw new NotImplementedException();
+            var product = _mapper.Map<Product>(productPostRequest);
+
+            var id = await _productService.CreateProduct(product).ConfigureAwait(false);
+
+            return new ProductPostResponse { Id = id };
         }
 
         // PUT products/{id}
-        public void Put(string id, [FromBody]ProductRequest product)
+        public void Put(string id, [FromBody]ProductPostRequest product)
         {
             throw new NotImplementedException();
         }

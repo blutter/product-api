@@ -18,7 +18,7 @@ namespace RestExampleApi.App_Start
 
             builder.RegisterType<ProductsController>();
             builder.RegisterType<ProductService>().As<IProductService>();
-            builder.RegisterType<ProductRepository>().As<IProductRepository>();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().SingleInstance();
 
             builder.Register(context => new MapperConfiguration(cfg =>
             {

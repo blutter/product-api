@@ -12,6 +12,8 @@ The basic model is implemented in Product.cs. The API represents this as differe
 
 * Controller/Service tests - my experience with CRUD based microservices is that there is often little benefit to writing unit tests for all levels and that end to end tests yield results faster. Nevertheless, I have added tests to demonstrate a BDD/TDD approach.
 * Repository tests - often there is no means to unit test a repository as this can involve integration with some actual persistent storage. As an in memory storage is being used then a set of tests are only provided for completeness.
+* Invalid cases - TBD
+** empty ids
 * Contract tests (e.g. Pact tests) - none have been implemented as this should be driven by a known consumer.
 * API end to end tests - TBD
 

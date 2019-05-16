@@ -47,7 +47,9 @@ namespace RestExample.Services
 
         public Task UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            var productEntity = mapper.Map<ProductEntity>(product);
+
+            return productRepository.UpdateProduct(productEntity);
         }
     }
 }

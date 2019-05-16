@@ -10,13 +10,13 @@ namespace RestExampleApi.Controllers
 {
     public class ProductsController : ApiController
     {
-        private readonly IMapper mapper;
-        private readonly IProductService productService;
+        private readonly IMapper _mapper;
+        private readonly IProductService _productService;
 
         public ProductsController(IMapper mapper, IProductService productService)
         {
-            this.mapper = mapper;
-            this.productService = productService;
+            _mapper = mapper;
+            _productService = productService;
         }
 
         // GET products
@@ -28,7 +28,9 @@ namespace RestExampleApi.Controllers
         // GET products/{id}
         public async Task<ProductResponse> Get(string id)
         {
-            throw new NotImplementedException();
+            var product = await _productService.GetProduct(id).ConfigureAwait(false);
+
+            return _mapper.Map<ProductResponse>(product);
         }
 
         // POST products

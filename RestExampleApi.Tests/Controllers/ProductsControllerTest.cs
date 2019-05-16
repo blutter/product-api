@@ -7,20 +7,21 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestExampleApi;
 using RestExampleApi.Controllers;
+using RestExampleApi.Models;
 
 namespace RestExampleApi.Tests.Controllers
 {
     [TestClass]
-    public class ValuesControllerTest
+    public class ProductsControllerTest
     {
         [TestMethod]
         public void Get()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ProductsController();
 
             // Act
-            IEnumerable<string> result = controller.Get();
+            IEnumerable<ProductResponse> result = controller.Get();
 
             // Assert
             Assert.IsNotNull(result);
@@ -33,10 +34,10 @@ namespace RestExampleApi.Tests.Controllers
         public void GetById()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ProductsController();
 
             // Act
-            string result = controller.Get(5);
+            var result = controller.Get("5");
 
             // Assert
             Assert.AreEqual("value", result);
@@ -46,10 +47,10 @@ namespace RestExampleApi.Tests.Controllers
         public void Post()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ProductsController();
 
             // Act
-            controller.Post("value");
+            controller.Post(null);
 
             // Assert
         }
@@ -58,10 +59,10 @@ namespace RestExampleApi.Tests.Controllers
         public void Put()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ProductsController();
 
             // Act
-            controller.Put(5, "value");
+            controller.Put("5", null);
 
             // Assert
         }
@@ -70,10 +71,10 @@ namespace RestExampleApi.Tests.Controllers
         public void Delete()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ProductsController();
 
             // Act
-            controller.Delete(5);
+            controller.Delete("5");
 
             // Assert
         }

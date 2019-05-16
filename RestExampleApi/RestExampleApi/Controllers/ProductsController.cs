@@ -5,7 +5,7 @@ using System.Web.Http;
 
 namespace RestExampleApi.Controllers
 {
-    public class ProductController : ApiController
+    public class ProductsController : ApiController
     {
         // GET products
         public IEnumerable<ProductResponse> Get()

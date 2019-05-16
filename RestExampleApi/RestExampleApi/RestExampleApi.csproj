@@ -150,6 +150,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductPutRequest.cs" />
     <Compile Include="Models\ProductPostResponse.cs" />
     <Compile Include="Models\ProductResponse.cs" />
     <Compile Include="Models\ProductPostRequest.cs" />

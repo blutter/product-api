@@ -46,15 +46,15 @@ namespace RestExampleApi.Controllers
         }
 
         // PUT products/{id}
-        public void Put(string id, [FromBody]ProductPostRequest product)
+        public void Put(string id, [FromBody]ProductPutRequest product)
         {
             throw new NotImplementedException();
         }
 
         // DELETE products/{id}
-        public void Delete(string id)
+        public async Task Delete(string id)
         {
-            throw new NotImplementedException();
+            await _productService.DeleteProduct(id).ConfigureAwait(false);
         }
     }
 }

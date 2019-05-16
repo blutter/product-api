@@ -2,15 +2,7 @@
 
 # Building, Running and Tests
 
-Use the following commands to build, run and execute unit tests:
-
-    dotnet build
-    dotnet run
-    dotnet test
-
-To watch tests:
-
-	  dotnet watch --project RestExampleTests/RestExampleTests.csproj test
+Install the NUnit 3 Test adapter for the tests to run in Visual Studio's Test Explorer
 
 # Model Notes
 

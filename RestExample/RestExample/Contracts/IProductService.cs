@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RestExample.Contracts
 {
     public interface IProductService
     {
-        List<Product> GetAllProducts();
-        Product GetProduct(int id);
-        void CreateProduct(Product product);
-        void UpdateProduct(Product product);
-        void DeleteProduct(int id);
+        Task<List<Product>> GetAllProducts();
+        Task<Product> GetProduct(string id);
+        Task<string> CreateProduct(Product product);
+        Task UpdateProduct(Product product);
+        Task DeleteProduct(string id);
     }
 }

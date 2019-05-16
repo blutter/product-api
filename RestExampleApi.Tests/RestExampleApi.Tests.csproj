@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\GetReturnsAllProducts.cs" />
     <Compile Include="Controllers\ProductIsSuccessfullyCreated.cs" />
     <Compile Include="Controllers\GetByIdReturnsProduct.cs" />
     <Compile Include="Controllers\ProductsControllerFactory.cs" />

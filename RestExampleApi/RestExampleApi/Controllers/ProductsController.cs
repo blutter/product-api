@@ -20,9 +20,11 @@ namespace RestExampleApi.Controllers
         }
 
         // GET products
-        public IEnumerable<ProductResponse> Get()
+        public async Task<IEnumerable<ProductResponse>> Get()
         {
-            throw new NotImplementedException();
+            var productList = await _productService.GetAllProducts().ConfigureAwait(false);
+
+            return _mapper.Map<IEnumerable<ProductResponse>>(productList);
         }
 
         // GET products/{id}

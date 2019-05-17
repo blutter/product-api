@@ -46,9 +46,13 @@ namespace RestExampleApi.Controllers
         }
 
         // PUT products/{id}
-        public void Put(string id, [FromBody]ProductPutRequest product)
+        public async Task Put(string id, [FromBody]ProductPutRequest productPutRequest)
         {
-            throw new NotImplementedException();
+            var product = _mapper.Map<Product>(productPutRequest);
+
+            product.Id = id;
+
+            await _productService.UpdateProduct(product).ConfigureAwait(false);
         }
 
         // DELETE products/{id}

@@ -8,7 +8,8 @@ namespace RestExample.Config
     {
         public RestExampleApiMapper()
         {
-            CreateMap<ProductPostRequest, Product>();
+            CreateMap<ProductPostRequest, Product>().ForMember(product => product.Id, option => option.Ignore());
+            CreateMap<ProductPutRequest, Product>().ForMember(product => product.Id, option => option.Ignore());
             CreateMap<Product, ProductResponse>();
         }
     }

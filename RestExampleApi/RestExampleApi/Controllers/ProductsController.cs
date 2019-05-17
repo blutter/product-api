@@ -28,11 +28,19 @@ namespace RestExampleApi.Controllers
         }
 
         // GET products/{id}
-        public async Task<ProductResponse> Get(string id)
+        public async Task<IHttpActionResult> Get(string id)
         {
             var product = await _productService.GetProduct(id).ConfigureAwait(false);
 
-            return _mapper.Map<ProductResponse>(product);
+            if (product != null)
+            {
+                var response = _mapper.Map<ProductResponse>(product);
+                return Ok(response);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST products

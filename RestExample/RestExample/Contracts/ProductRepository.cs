@@ -51,7 +51,7 @@ namespace RestExample.Contracts
         public Task UpdateProduct(ProductEntity product)
         {
             _dictionary.AddOrUpdate(product.Id,
-                (_) => { throw new KeyNotFoundException(); },
+                (_) => { throw new KeyNotFoundException($"Could not update product id {product.Id} - product not found"); },
                 (id, oldValue) =>
                 {
                     product.Id = id;

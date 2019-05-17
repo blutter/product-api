@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UnknownProductGetByIdReturnsNotFound.cs" />
     <Compile Include="Controllers\ProductIsSuccessfullyUpdated.cs" />
     <Compile Include="Controllers\ProductIsSuccessfullyDeleted.cs" />
     <Compile Include="Controllers\GetReturnsAllProducts.cs" />

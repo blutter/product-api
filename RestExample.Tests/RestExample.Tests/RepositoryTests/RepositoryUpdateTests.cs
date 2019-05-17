@@ -39,6 +39,22 @@ namespace RestExample.Tests.RepositoryTests
             updatedProduct.Model.Should().Be("Top of the line");
         }
 
+        [Test]
+        public async Task UpdatingUnknownProduct_ThrowsException()
+        {
+            // arrange
+            var repo = CreateRepository();
+            var product = Builder<ProductEntity>.CreateNew()
+                .With(entity => entity.Id = "unknown")
+                .Build();
+
+            // act
+            Func<Task> fn = async () => await repo.UpdateProduct(product);
+
+            // assert
+            fn.Should().Throw<KeyNotFoundException>();
+        }
+
         private IProductRepository CreateRepository()
         {
             return new ProductRepository();

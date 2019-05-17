@@ -50,7 +50,19 @@ namespace RestExample.Contracts
 
         public Task UpdateProduct(ProductEntity product)
         {
-            throw new NotImplementedException();
+            _dictionary.AddOrUpdate(product.Id,
+                (_) => { throw new KeyNotFoundException(); },
+                (id, oldValue) =>
+                {
+                    product.Id = id;
+                    product.Description = product.Description ?? oldValue.Description;
+                    product.Brand = product.Brand ?? oldValue.Brand;
+                    product.Model = product.Model ?? oldValue.Model;
+
+                    return product;
+                });
+
+            return Task.CompletedTask;
         }
     }
 }

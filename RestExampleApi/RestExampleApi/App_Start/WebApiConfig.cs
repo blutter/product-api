@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestExampleApi.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -19,6 +20,9 @@ namespace RestExampleApi
                 routeTemplate: "{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Message handlers
+            config.MessageHandlers.Add(new CustomAuthenticationHandler());
         }
     }
 }

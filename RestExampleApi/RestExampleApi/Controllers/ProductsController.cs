@@ -45,6 +45,7 @@ namespace RestExampleApi.Controllers
         }
 
         // POST products
+        [Authorize]
         public async Task<IHttpActionResult> Post([FromBody]ProductPostRequest productPostRequest)
         {
             if (ModelState.IsValid)
@@ -62,6 +63,7 @@ namespace RestExampleApi.Controllers
         }
 
         // PUT products/{id}
+        [Authorize]
         public async Task<IHttpActionResult> Put(string id, [FromBody]ProductPutRequest productPutRequest)
         {
             try
@@ -85,6 +87,7 @@ namespace RestExampleApi.Controllers
         }
 
         // DELETE products/{id}
+        [Authorize]
         public async Task<IHttpActionResult> Delete(string id)
         {
             try

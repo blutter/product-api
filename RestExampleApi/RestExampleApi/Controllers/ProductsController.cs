@@ -46,11 +46,18 @@ namespace RestExampleApi.Controllers
         // POST products
         public async Task<IHttpActionResult> Post([FromBody]ProductPostRequest productPostRequest)
         {
-            var product = _mapper.Map<Product>(productPostRequest);
+            if (ModelState.IsValid)
+            {
+                var product = _mapper.Map<Product>(productPostRequest);
 
-            var id = await _productService.CreateProduct(product).ConfigureAwait(false);
+                var id = await _productService.CreateProduct(product).ConfigureAwait(false);
 
-            return Ok(new ProductPostResponse { Id = id });
+                return Ok(new ProductPostResponse { Id = id });
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // PUT products/{id}

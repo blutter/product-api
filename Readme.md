@@ -8,6 +8,13 @@ Unit tests are in `RestExampleApi.Tests` and `RestExample.Tests`.
 
 # Building, Running and Tests
 
+Build using Visual Studio 2019/2017.
+
+e.g.
+
+    nuget restore RestExample.sln
+    devenv RestExample.sln /Build
+
 Install the NUnit 3 Test adapter for the tests to run in Visual Studio's Test Explorer.
 
 # Model Notes
@@ -39,3 +46,12 @@ e.g. `GET products?description=super`
 # A UI
 
 An OpenApi interface is provided as a 'poor man's' UI. This is accessible via the `/swagger` route.
+
+# Authentication/Authorization
+
+The write operations (PUT, POST and DELETE) are only authorized to a user `jb`.
+
+This user can authenticate (with password `hifi`) using basic authentication. i.e. the header:
+
+    Authorization:Basic amI6aGlmaQ==
+

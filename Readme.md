@@ -6,6 +6,8 @@ The API is implemented in the `RestExampleApi` project with the `RestExample` pr
 
 Unit tests are in `RestExampleApi.Tests` and `RestExample.Tests`.
 
+The API is implemented using WebApi2 as per the instructions instead of ASP.NET Core. Please note that I have not used WebApi2 for a couple of years as my recent development experience has been using Dotnet Core.
+
 # Building, Running and Tests
 
 Build using Visual Studio 2019/2017.

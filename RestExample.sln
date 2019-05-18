@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestExampleApi", "RestExampleApi\RestExampleApi\RestExampleApi.csproj", "{D4BBC9A0-4FD3-4CA2-9CA9-2B6D31C216C9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{05884279-491D-4AB6-8699-5D179A519528} = {05884279-491D-4AB6-8699-5D179A519528}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestExampleApi.Tests", "RestExampleApi.Tests\RestExampleApi.Tests.csproj", "{D84D232D-2202-4879-9932-7B877F08D68E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestExample", "RestExample\RestExample\RestExample.csproj", "{05884279-491D-4AB6-8699-5D179A519528}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestExample", "RestExample\RestExample\RestExample.csproj", "{05884279-491D-4AB6-8699-5D179A519528}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestExample.Tests", "RestExample.Tests\RestExample.Tests\RestExample.Tests.csproj", "{1A811595-38D6-4934-806B-B84108B107D2}"
 EndProject

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using RestExample.Contracts;
 using RestExample.Model;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace RestExampleApi.Controllers
 {
@@ -19,7 +20,12 @@ namespace RestExampleApi.Controllers
             _productService = productService;
         }
 
-        // GET products
+        /// <summary>
+        /// Get all products (with optional filter)
+        /// </summary>
+        /// <param name="productFilterQuery"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<ProductResponse>))]
         public async Task<IHttpActionResult> Get([FromUri]ProductFilterQuery productFilterQuery)
         {
             var productFilter = _mapper.Map<ProductFilter>(productFilterQuery);
@@ -28,7 +34,12 @@ namespace RestExampleApi.Controllers
             return Ok(_mapper.Map<IEnumerable<ProductResponse>>(productList));
         }
 
-        // GET products/{id}
+        /// <summary>
+        /// Get one product details
+        /// </summary>
+        /// <param name="id">product id</param>
+        /// <returns></returns>
+        [ResponseType(typeof(ProductResponse))]
         public async Task<IHttpActionResult> Get(string id)
         {
             var product = await _productService.GetProduct(id).ConfigureAwait(false);
@@ -44,8 +55,13 @@ namespace RestExampleApi.Controllers
             }
         }
 
-        // POST products
+        /// <summary>
+        /// Create a product
+        /// </summary>
+        /// <param name="productPostRequest"></param>
+        /// <returns>Id of newly created product</returns>
         [Authorize]
+        [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Post([FromBody]ProductPostRequest productPostRequest)
         {
             if (ModelState.IsValid)
@@ -62,7 +78,12 @@ namespace RestExampleApi.Controllers
             }
         }
 
-        // PUT products/{id}
+        /// <summary>
+        /// Modify an existing product
+        /// </summary>
+        /// <param name="id">product id</param>
+        /// <param name="productPutRequest">Product fields to modify</param>
+        /// <returns></returns>
         [Authorize]
         public async Task<IHttpActionResult> Put(string id, [FromBody]ProductPutRequest productPutRequest)
         {
@@ -86,7 +107,11 @@ namespace RestExampleApi.Controllers
             }
         }
 
-        // DELETE products/{id}
+        /// <summary>
+        /// Delete a product
+        /// </summary>
+        /// <param name="id">product id</param>
+        /// <returns></returns>
         [Authorize]
         public async Task<IHttpActionResult> Delete(string id)
         {

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace RestExampleApi.Models
+﻿namespace RestExampleApi.Models
 {
     public class ProductPostResponse
     {
+        /// <summary>
+        /// Id of product
+        /// </summary>
         public string Id { get; set; }
     }
 }

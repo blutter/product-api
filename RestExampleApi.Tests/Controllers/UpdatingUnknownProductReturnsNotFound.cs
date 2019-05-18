@@ -7,7 +7,6 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using RestExample.Contracts;
-using RestExample.Model;
 using RestExampleApi.Controllers;
 using RestExampleApi.Models;
 using SpecsFor.StructureMap;

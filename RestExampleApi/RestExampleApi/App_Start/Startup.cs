@@ -5,7 +5,6 @@ using RestExample.Config;
 using RestExample.Contracts;
 using RestExample.Services;
 using RestExampleApi.Controllers;
-using System;
 using System.Web.Http;
 
 namespace RestExampleApi.App_Start

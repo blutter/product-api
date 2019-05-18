@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
 using FizzWare.NBuilder;
 using FluentAssertions;
 using Moq;
@@ -15,6 +17,7 @@ namespace RestExampleApi.Tests.Controllers
     {
         private ProductsController _controller;
         private Product _product;
+        private IHttpActionResult _result;
 
         protected override void When()
         {
@@ -30,7 +33,7 @@ namespace RestExampleApi.Tests.Controllers
 
             var task = Task.Run(async () =>
             {
-                await _controller.Put("id1", request).ConfigureAwait(false);
+                _result = await _controller.Put("id1", request).ConfigureAwait(false);
             });
 
             task.Wait();
@@ -47,6 +50,12 @@ namespace RestExampleApi.Tests.Controllers
         public void ThenTheProductIsUpdatedUsingTheService()
         {
             SUT.ProductService.Verify(repo => repo.UpdateProduct(It.IsAny<Product>()), Times.Once);
+        }
+
+        [Test]
+        public void ThenAnOkResultIsReturned()
+        {
+            _result.Should().BeOfType<OkResult>();
         }
 
         [Test]

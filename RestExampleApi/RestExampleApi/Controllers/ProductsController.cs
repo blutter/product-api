@@ -54,13 +54,26 @@ namespace RestExampleApi.Controllers
         }
 
         // PUT products/{id}
-        public async Task Put(string id, [FromBody]ProductPutRequest productPutRequest)
+        public async Task<IHttpActionResult> Put(string id, [FromBody]ProductPutRequest productPutRequest)
         {
-            var product = _mapper.Map<Product>(productPutRequest);
+            try
+            {
+                var product = _mapper.Map<Product>(productPutRequest);
 
-            product.Id = id;
+                product.Id = id;
 
-            await _productService.UpdateProduct(product).ConfigureAwait(false);
+                await _productService.UpdateProduct(product).ConfigureAwait(false);
+
+                return Ok();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         // DELETE products/{id}

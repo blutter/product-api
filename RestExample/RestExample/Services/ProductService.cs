@@ -31,7 +31,7 @@ namespace RestExample.Services
             return productRepository.DeleteProduct(id);
         }
 
-        public async Task<List<Product>> GetAllProducts()
+        public async Task<List<Product>> GetAllProducts(ProductFilter productFilter)
         {
             var products = await productRepository.GetAllProducts().ConfigureAwait(false);
 

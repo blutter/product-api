@@ -11,6 +11,7 @@ namespace RestExample.Config
             CreateMap<ProductPostRequest, Product>().ForMember(product => product.Id, option => option.Ignore());
             CreateMap<ProductPutRequest, Product>().ForMember(product => product.Id, option => option.Ignore());
             CreateMap<Product, ProductResponse>();
+            CreateMap<ProductFilterQuery, ProductFilter>();
         }
     }
 }

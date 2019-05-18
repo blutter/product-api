@@ -143,6 +143,7 @@
   <ItemGroup>
     <Compile Include="Controllers\DeletingUnknownProductReturnsNotFound.cs" />
     <Compile Include="Controllers\CreatingProductWithMissingFieldsReturnsBadRequest.cs" />
+    <Compile Include="Controllers\GetFiltersAcrossAllProducts.cs" />
     <Compile Include="Controllers\UpdatingUnknownProductReturnsNotFound.cs" />
     <Compile Include="Controllers\UnknownProductGetByIdReturnsNotFound.cs" />
     <Compile Include="Controllers\ProductIsSuccessfullyUpdated.cs" />

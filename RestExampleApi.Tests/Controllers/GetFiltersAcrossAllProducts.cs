@@ -14,7 +14,7 @@ using SpecsFor.StructureMap;
 
 namespace RestExampleApi.Tests.Controllers
 {
-    public class GetReturnsAllProducts : SpecsFor<ProductsControllerFactory>
+    public class GetFiltersAcrossAllProducts : SpecsFor<ProductsControllerFactory>
     {
         private ProductsController _controller;
         private IHttpActionResult _result;
@@ -25,9 +25,15 @@ namespace RestExampleApi.Tests.Controllers
 
             SetupServiceToReturnProducts();
 
+            var productFilterRequest = Builder<ProductFilterQuery>.CreateNew()
+                .With(filter => filter.Description = "washing")
+                .And(filter => filter.Brand = "ASKO")
+                .And(filter => filter.Model = null)
+                .Build();
+
             var task = Task.Run(async () =>
             {
-                _result = await _controller.Get(new ProductFilterQuery()).ConfigureAwait(false);
+                _result = await _controller.Get(productFilterRequest).ConfigureAwait(false);
             });
 
             task.Wait();
@@ -44,7 +50,7 @@ namespace RestExampleApi.Tests.Controllers
         public void ThenTheProductsAreReadFromTheService()
         {
             SUT.ProductService.Verify(service => service.GetAllProducts(
-                It.Is<ProductFilter>(filter => filter.Description == null && filter.Brand == null && filter.Model == null)), Times.Once);
+                It.Is<ProductFilter>(filter => filter.Description == "washing" && filter.Brand == "ASKO" && filter.Model == null)), Times.Once);
         }
 
         [Test]

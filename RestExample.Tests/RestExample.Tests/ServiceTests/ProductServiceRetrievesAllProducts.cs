@@ -26,7 +26,7 @@ namespace RestExample.Tests.ServiceTests
 
             var task = Task.Run(async () =>
             {
-                _result = await _productService.GetAllProducts().ConfigureAwait(false);
+                _result = await _productService.GetAllProducts(new ProductFilter()).ConfigureAwait(false);
             });
             
             task.Wait();

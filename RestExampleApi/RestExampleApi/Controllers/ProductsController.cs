@@ -20,9 +20,10 @@ namespace RestExampleApi.Controllers
         }
 
         // GET products
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> Get([FromUri]ProductFilterQuery productFilterQuery)
         {
-            var productList = await _productService.GetAllProducts().ConfigureAwait(false);
+            var productFilter = _mapper.Map<ProductFilter>(productFilterQuery);
+            var productList = await _productService.GetAllProducts(productFilter).ConfigureAwait(false);
 
             return Ok(_mapper.Map<IEnumerable<ProductResponse>>(productList));
         }

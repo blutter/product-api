@@ -36,7 +36,6 @@ namespace RestExampleApi.Tests.Controllers
 
         private void SetupServiceToThrowNotFoundException()
         {
-            Product nullProduct = null;
             SUT.ProductService.Setup(service => service.UpdateProduct(It.IsAny<Product>())).ThrowsAsync(new KeyNotFoundException());
         }
 

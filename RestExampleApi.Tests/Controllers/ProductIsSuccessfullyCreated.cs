@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
 using FizzWare.NBuilder;
 using FluentAssertions;
 using Moq;
@@ -14,7 +16,7 @@ namespace RestExampleApi.Tests.Controllers
     public class ProductIsSuccessfullyCreated : SpecsFor<ProductsControllerFactory>
     {
         private ProductsController _controller;
-        private ProductPostResponse _response;
+        private IHttpActionResult _response;
 
         protected override void When()
         {
@@ -46,9 +48,17 @@ namespace RestExampleApi.Tests.Controllers
         }
 
         [Test]
+        public void ThenOnOkIsReturned()
+        {
+            _response.Should().BeOfType<OkNegotiatedContentResult<ProductPostResponse>>();
+        }
+
+        [Test]
         public void ThenTheProductIdIsReturned()
         {
-            _response.Id.Should().Be("1234");
+            var response = _response as OkNegotiatedContentResult<ProductPostResponse>;
+            response.Should().NotBeNull();
+            response.Content.Id.Should().Be("1234");
         }
     }
 }

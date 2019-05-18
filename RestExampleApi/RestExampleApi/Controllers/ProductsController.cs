@@ -20,11 +20,11 @@ namespace RestExampleApi.Controllers
         }
 
         // GET products
-        public async Task<IEnumerable<ProductResponse>> Get()
+        public async Task<IHttpActionResult> Get()
         {
             var productList = await _productService.GetAllProducts().ConfigureAwait(false);
 
-            return _mapper.Map<IEnumerable<ProductResponse>>(productList);
+            return Ok(_mapper.Map<IEnumerable<ProductResponse>>(productList));
         }
 
         // GET products/{id}
@@ -44,13 +44,13 @@ namespace RestExampleApi.Controllers
         }
 
         // POST products
-        public async Task<ProductPostResponse> Post([FromBody]ProductPostRequest productPostRequest)
+        public async Task<IHttpActionResult> Post([FromBody]ProductPostRequest productPostRequest)
         {
             var product = _mapper.Map<Product>(productPostRequest);
 
             var id = await _productService.CreateProduct(product).ConfigureAwait(false);
 
-            return new ProductPostResponse { Id = id };
+            return Ok(new ProductPostResponse { Id = id });
         }
 
         // PUT products/{id}

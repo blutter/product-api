@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
 using FizzWare.NBuilder;
 using FluentAssertions;
 using Moq;
@@ -15,7 +17,7 @@ namespace RestExampleApi.Tests.Controllers
     public class GetReturnsAllProducts : SpecsFor<ProductsControllerFactory>
     {
         private ProductsController _controller;
-        private IEnumerable<ProductResponse> _result;
+        private IHttpActionResult _result;
 
         protected override void When()
         {
@@ -45,9 +47,17 @@ namespace RestExampleApi.Tests.Controllers
         }
 
         [Test]
+        public void ThenOnOkIsReturned()
+        {
+            _result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<ProductResponse>>>();
+        }
+
+        [Test]
         public void ThenTheProductsAreReturned()
         {
-            _result.Should().HaveCount(5);
+            var result = _result as OkNegotiatedContentResult<IEnumerable<ProductResponse>>;
+            result.Should().NotBeNull();
+            result.Content.Should().HaveCount(5);
         }
     }
 }

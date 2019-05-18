@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using FluentAssertions;
@@ -9,7 +10,7 @@ using SpecsFor.StructureMap;
 
 namespace RestExampleApi.Tests.Controllers
 {
-    public class ProductIsSuccessfullyDeleted : SpecsFor<ProductsControllerFactory>
+    public class DeletingUnknownProductReturnsNotFound : SpecsFor<ProductsControllerFactory>
     {
         private ProductsController _controller;
         private IHttpActionResult _result;
@@ -17,6 +18,8 @@ namespace RestExampleApi.Tests.Controllers
         protected override void When()
         {
             _controller = SUT.BuildProductController();
+
+            SetupServiceToThrowNotFoundException();
 
             var task = Task.Run(async () =>
             {
@@ -26,16 +29,21 @@ namespace RestExampleApi.Tests.Controllers
             task.Wait();
         }
 
-        [Test]
-        public void ThenTheProductIsDeletedUsingTheService()
+        private void SetupServiceToThrowNotFoundException()
         {
-            SUT.ProductService.Verify(repo => repo.DeleteProduct("id"), Times.Once);
+            SUT.ProductService.Setup(service => service.DeleteProduct(It.IsAny<string>())).ThrowsAsync(new KeyNotFoundException());
         }
 
         [Test]
-        public void ThenAnOkResultIsReturned()
+        public void ThenTheProductIsDeletedUsingTheService()
         {
-            _result.Should().BeOfType<OkResult>();
+            SUT.ProductService.Verify(service => service.DeleteProduct("id"), Times.Once);
+        }
+
+        [Test]
+        public void ThenANotFoundIsReturned()
+        {
+            _result.Should().BeOfType<NotFoundResult>();
         }
     }
 }

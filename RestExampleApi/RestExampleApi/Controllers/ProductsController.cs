@@ -77,9 +77,22 @@ namespace RestExampleApi.Controllers
         }
 
         // DELETE products/{id}
-        public async Task Delete(string id)
+        public async Task<IHttpActionResult> Delete(string id)
         {
-            await _productService.DeleteProduct(id).ConfigureAwait(false);
+            try
+            {
+                await _productService.DeleteProduct(id).ConfigureAwait(false);
+
+                return Ok();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
     }
 }

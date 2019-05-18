@@ -97,8 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MapperTests\MapperTests.cs" />
+    <Compile Include="RepositoryTests\RepositoryFilterTests.cs" />
     <Compile Include="RepositoryTests\RepositoryUpdateTests.cs" />
     <Compile Include="RepositoryTests\RepositoryTests.cs" />
+    <Compile Include="ServiceTests\ProductServiceFiltersAllProducts.cs" />
     <Compile Include="ServiceTests\UpdateProductWithProductService.cs" />
     <Compile Include="ServiceTests\DeleteProductWithProductService.cs" />
     <Compile Include="ServiceTests\ProductServiceFactory.cs" />

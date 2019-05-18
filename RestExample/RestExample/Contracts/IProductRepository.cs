@@ -7,6 +7,7 @@ namespace RestExample.Contracts
     public interface IProductRepository
     {
         Task<List<ProductEntity>> GetAllProducts();
+        Task<List<ProductEntity>> GetAllProducts(ProductRepositoryFilter filter);
         Task<ProductEntity> GetProduct(string id);
         Task<string> CreateProduct(ProductEntity product);
         Task UpdateProduct(ProductEntity product);

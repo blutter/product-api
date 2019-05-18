@@ -11,7 +11,7 @@ using SpecsFor.StructureMap;
 
 namespace RestExample.Tests.ServiceTests
 {
-    public class ProductServiceRetrievesAllProducts : SpecsFor<ProductServiceFactory>
+    public class ProductServiceFiltersAllProducts : SpecsFor<ProductServiceFactory>
     {
         private IProductService _productService;
         private List<Product> _result;
@@ -22,9 +22,15 @@ namespace RestExample.Tests.ServiceTests
 
             SetupRepositoryToReturnThreeProducts();
 
+            var productFilter = Builder<ProductFilter>.CreateNew()
+                .With(filter => filter.Description = "washing")
+                .And(filter => filter.Brand = null)
+                .And(filter => filter.Model = null)
+                .Build();
+
             var task = Task.Run(async () =>
             {
-                _result = await _productService.GetAllProducts(new ProductFilter()).ConfigureAwait(false);
+                _result = await _productService.GetAllProducts(productFilter).ConfigureAwait(false);
             });
             
             task.Wait();
@@ -33,13 +39,14 @@ namespace RestExample.Tests.ServiceTests
         private void SetupRepositoryToReturnThreeProducts()
         {
             var productList = Builder<ProductEntity>.CreateListOfSize(3).Build().ToList();
-            SUT.ProductRepository.Setup(repo => repo.GetAllProducts()).ReturnsAsync(productList);
+            SUT.ProductRepository.Setup(repo => repo.GetAllProducts(It.IsAny<ProductRepositoryFilter>())).ReturnsAsync(productList);
         }
 
         [Test]
         public void ThenTheProductsAreObtainedFromTheRepository()
         {
-            SUT.ProductRepository.Verify(repo => repo.GetAllProducts(), Times.Once);
+            SUT.ProductRepository.Verify(repo => repo.GetAllProducts(
+                It.Is<ProductRepositoryFilter>(filter => filter.Description == "washing" && filter.Brand == null && filter.Model == null)), Times.Once);
         }
 
         [Test]

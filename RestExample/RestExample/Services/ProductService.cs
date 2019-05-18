@@ -33,7 +33,17 @@ namespace RestExample.Services
 
         public async Task<List<Product>> GetAllProducts(ProductFilter productFilter)
         {
-            var products = await productRepository.GetAllProducts().ConfigureAwait(false);
+            List<ProductEntity> products = null;
+
+            if (productFilter == null || 
+                (string.IsNullOrWhiteSpace(productFilter.Brand) && string.IsNullOrWhiteSpace(productFilter.Description) && string.IsNullOrWhiteSpace(productFilter.Model)))
+            {
+                products = await productRepository.GetAllProducts().ConfigureAwait(false);
+            }
+            else
+            {
+                products = await productRepository.GetAllProducts(mapper.Map<ProductRepositoryFilter>(productFilter));
+            }
 
             return mapper.Map<List<Product>>(products);
         }

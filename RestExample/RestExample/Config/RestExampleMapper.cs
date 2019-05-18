@@ -9,6 +9,7 @@ namespace RestExample.Config
         public RestExampleMapper()
         {
             CreateMap<ProductEntity, Product>();
+            CreateMap<ProductFilter, ProductRepositoryFilter>();
         }
     }
 }

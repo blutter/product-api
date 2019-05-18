@@ -40,6 +40,29 @@ namespace RestExample.Contracts
             return Task.FromResult(productList);
         }
 
+        public Task<List<ProductEntity>> GetAllProducts(ProductRepositoryFilter filter)
+        {
+            var filteredProducts = _dictionary.ToArray().AsEnumerable();
+
+            if (!string.IsNullOrWhiteSpace(filter.Description))
+            {
+                filteredProducts = filteredProducts.Where(kvp => 
+                    !string.IsNullOrWhiteSpace(kvp.Value.Description) && kvp.Value.Description.Contains(filter.Description));
+            }
+            if (!string.IsNullOrWhiteSpace(filter.Brand))
+            {
+                filteredProducts = filteredProducts.Where(kvp =>
+                    !string.IsNullOrWhiteSpace(kvp.Value.Brand) && kvp.Value.Brand.Contains(filter.Brand));
+            }
+            if (!string.IsNullOrWhiteSpace(filter.Model))
+            {
+                filteredProducts = filteredProducts.Where(kvp =>
+                    !string.IsNullOrWhiteSpace(kvp.Value.Model) && kvp.Value.Model.Contains(filter.Model));
+            }
+
+            return Task.FromResult(filteredProducts.Select(kvp => kvp.Value).ToList());
+        }
+
         public Task<ProductEntity> GetProduct(string id)
         {
             ProductEntity product = null;
